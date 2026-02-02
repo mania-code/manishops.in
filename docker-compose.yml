@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  pipeline-service:
+    build:
+      context: ./pipeline-service
+    ports:
+      - "8080:8080" # Optional: expose if you need direct access for debugging
+    restart: always
+
+  web:
+    build:
+      context: ./web
+    ports:
+      - "80:80"
+    depends_on:
+      - pipeline-service
+    restart: always
